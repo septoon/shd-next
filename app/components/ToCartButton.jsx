@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Link from 'next/link'
 import Image from 'next/image'
 
-import CartIcon from '@/public/img/cart-logo.svg';
+import CartIcon from '@/public/img/shopping-cart.svg';
 
 const ToCartButton = () => {
   const { items, totalCount, totalPrice } = useSelector(({ cart }) => ({
