@@ -1,5 +1,7 @@
 import Header from './components/Header'
 import './globals.css'
+import 'primereact/resources/themes/lara-light-cyan/theme.css';
+import 'primeicons/primeicons.css';
 
 import { Providers } from './GlobalRedux/provider'
 import { PrimeReactProvider } from 'primereact/api';

@@ -6,14 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addDishToCart } from '../GlobalRedux/Features/cart/cartSlice';
 import pic from '@/public/img/pic.jpg'
 import { Button } from 'primereact/button';
-import 'primereact/resources/themes/lara-light-cyan/theme.css';
-import 'primeicons/primeicons.css';
+
 
 const MenuItem = () => {
 const item = useSelector((state) => state.item.item)
 const dispatch = useDispatch()
 
-const onAddDishes = () => {
+const onAddDishes = (id, name, image, serving, options, price,) => {
   const obj = {
     id,
     name,
@@ -49,7 +48,7 @@ const onAddDishes = () => {
             </div>
             <div className="w-full flex flex-row justify-between items-center pr-2">
               <span className="font-bold text-lightSlate-gray">{i.price} ₽</span>
-              <Button className="py-1 px-2 z-0" label="В корзину" onClick={onAddDishes}></Button>
+              <Button className="py-1 px-2 z-0" label="В корзину" onClick={() => onAddDishes(i.id, i.name, i.image, i.serving, i.options, i.price,)}></Button>
             </div>
           </div>
         </div>
