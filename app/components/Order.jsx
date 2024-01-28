@@ -5,9 +5,6 @@ import React, { useState } from 'react';
 import { InputMask } from 'primereact/inputmask';
 import { Calendar } from 'primereact/calendar';
 
-import 'primereact/resources/themes/lara-light-cyan/theme.css';
-import 'primeicons/primeicons.css';
-
 import { InputSwitch } from 'primereact/inputswitch';
 import { addLocale } from 'primereact/api';
 import { InputText } from 'primereact/inputtext';
