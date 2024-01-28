@@ -268,7 +268,7 @@ const Cart = () => {
               <div className="">
                 <div className="">
                   <Button
-                    className="px-4 py-2 bg-lightSlate-gray rounded-md fixed bottom-main-btn left-6 lg:left-[20%]"
+                    className="px-4 py-2 bg-lightSlate-gray text-white rounded-md fixed bottom-main-btn left-6 lg:left-[20%]"
                     onClick={() => show('bottom')}
                     label="Оформить заказ"
                   />

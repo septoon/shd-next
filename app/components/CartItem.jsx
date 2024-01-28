@@ -62,7 +62,7 @@ const CartItem = ({
       </div>
       <div className="">
         <div className="" onClick={onRemoveDish}>
-          <Image src={Trash} className="w-3 h-3" width={3} height={3} alt="closeCart" />
+          <Image src={Trash} className="w-4 h-4" width={4} height={4} alt="closeCart" />
         </div>
       </div>
     </div>
