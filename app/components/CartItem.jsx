@@ -38,7 +38,7 @@ const CartItem = ({
     onClickRemoveDish(dishObj);
   };
   return (
-    <div className="h-20 px-1.5 flex justify-between items-center mb-2 bg-white font-comfortaa rounded-xl">
+    <div className="h-20 px-1.5 lg:px-3 flex justify-between items-center mb-2 bg-white font-comfortaa rounded-xl">
       <div className="cart__item-img">
         <Image className="min-w-10 max-w-10 lg:max-w-24 max-h-8 rounded-md" width={10} height={8} src={image} alt="картинка" />
       </div>
