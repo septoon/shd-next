@@ -31,6 +31,7 @@ const MenuCards = () => {
             src={data[category][0].image}
             width={40}
             height={28}
+            sizes="100%"
             className="w-[95%] min-h-28 max-h-28 object-cover rounded-md"
             alt="menu-item"
           />
