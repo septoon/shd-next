@@ -20,7 +20,7 @@ const SidebarNav = () => {
 
   return (
     <Sidebar visible={isOpen} position="right" onHide={() => dispatch(setIsOpen(false))}>
-      <div className="w-full h-full flex flex-col items-center transition-all z-50">
+      <div className="w-full h-full bg-white flex flex-col items-center transition-all z-50">
         <div className="w-full h-1/2 uppercase font-bold font-comfortaa text-lg text-dark flex flex-col items-start justify-between">
           <div className="flex items-center">
             <Image width="20" height="20" className="mr-4" src={MainIcon} alt="home-page" />
