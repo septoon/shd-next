@@ -280,7 +280,7 @@ const Cart = () => {
           // Если корзина пустая
           <div className="px-6 pt-6 w-full flex flex-col items-center justify-around">
             <h2 className="mb-6 self-start">Корзина пустая</h2>
-            <Image src={CartIcon} className="opacity-50 w-1/2" alt="cart" />
+            <Image src={CartIcon} className="opacity-50 w-1/2 max-w-[300px]" alt="cart" />
             <span className="mt-6">
               Вероятней всего, вы еще ничего не заказали. Для того, чтобы сделать заказ, перейди на
               страницу меню.
