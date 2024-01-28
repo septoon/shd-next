@@ -25,9 +25,9 @@ const onAddDishes = (id, name, image, serving, options, price,) => {
 };
 
   return (
-    <div className=" flex flex-wrap justify-start px-5 pb-[80px]">
+    <div className=" flex flex-wrap justify-start md:justify-between px-5 pb-[80px]">
       {item.map((i) => (
-        <div key={i.id} className="w-full md:w-1/2 lg:w-1/3 flex flex-row items-center rounded-10 mb-5 bg-white rounded-md shadow-xl">
+        <div key={i.id} className="w-full md:w-[48%] lg:w-[48%] flex flex-row items-center rounded-10 mb-5 bg-white rounded-md shadow-xl">
           <Image
             src={i.image ? i.image : pic}
             width={40}
@@ -48,7 +48,7 @@ const onAddDishes = (id, name, image, serving, options, price,) => {
             </div>
             <div className="w-full flex flex-row justify-between items-center pr-2">
               <span className="font-bold text-lightSlate-gray">{i.price} ₽</span>
-              <Button className="py-1 px-2 z-0" label="В корзину" onClick={() => onAddDishes(i.id, i.name, i.image, i.serving, i.options, i.price,)}></Button>
+              <Button className="py-1 px-2 z-0 text-white bg-lightSlate-gray active:bg-light-gray" label="В корзину" onClick={() => onAddDishes(i.id, i.name, i.image, i.serving, i.options, i.price,)}></Button>
             </div>
           </div>
         </div>
