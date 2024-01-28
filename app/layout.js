@@ -11,7 +11,7 @@ import MenuNav from './components/MenuNav';
 
 export const metadata = {
   title: 'Шашлычный дом',
-  description: 'Доставка шашлыка в Алуште',
+  description: 'Доставка шашлыка в Алуште. Наш адрес ул Ленина 13.',
 }
 
 export default function RootLayout({ children }) {

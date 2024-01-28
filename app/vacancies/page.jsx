@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 export const metadata = {
   title: 'Шашлычный дом | Вакансии',
-  description: 'Шашлычный дом, вакансии',
+  description: 'Вакансии',
 }
 
 const Vacancies = () => {
