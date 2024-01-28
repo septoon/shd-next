@@ -40,10 +40,10 @@ const CartItem = ({
   return (
     <div className="h-20 px-1.5 flex justify-between items-center mb-2 bg-white font-comfortaa rounded-xl">
       <div className="cart__item-img">
-        <Image className="min-w-10 max-w-10 max-h-8 rounded-md" width={10} height={8} src={image} alt="картинка" />
+        <Image className="min-w-10 max-w-10 lg:max-w-24 max-h-8 rounded-md" width={10} height={8} src={image} alt="картинка" />
       </div>
       <div className="flex flex-col w-[30%]">
-        <span className='text-[10px] '>{name}</span>
+        <span className='text-[10px] md:text-[14px] lg:text-xl '>{name}</span>
         <span className='text-xs opacity-40'>{serving}</span>
       </div>
       <button className="w-4" onClick={onMinusDish}>-</button>
@@ -62,7 +62,7 @@ const CartItem = ({
       </div>
       <div className="">
         <div className="" onClick={onRemoveDish}>
-          <Image src={Trash} className="" width={3} height={3} alt="closeCart" />
+          <Image src={Trash} className="w-3 h-3" width={3} height={3} alt="closeCart" />
         </div>
       </div>
     </div>

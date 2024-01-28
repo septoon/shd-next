@@ -233,7 +233,7 @@ const Cart = () => {
                   let popup = window.confirm('Вы уверены, что хотите очистить корзину?');
                   popup && dispatch(clearDishCart());
                 }}>
-                <img className="text-lightSlate-gray" src={Trash} alt="trash" />
+                <Image className="text-lightSlate-gray" src={Trash} alt="trash" />
                 <span>Очистить корзину</span>
               </div>
             </div>
