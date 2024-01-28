@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const localItems = localStorage.getItem('items') != null ? JSON.parse(localStorage.getItem('items')) : []
-const localCount = localStorage.getItem('totalCount') != null ? JSON.parse(localStorage.getItem('totalCount')) : 0
-const localPrice = localStorage.getItem('totalPrice') != null ? JSON.parse(localStorage.getItem('totalPrice')) : 0
+const localItems = window?.localStorage?.getItem('items') != null ? JSON.parse(localStorage.getItem('items')) : []
+const localCount = window?.localStorage?.getItem('totalCount') != null ? JSON.parse(localStorage.getItem('totalCount')) : 0
+const localPrice = window?.localStorage?.getItem('totalPrice') != null ? JSON.parse(localStorage.getItem('totalPrice')) : 0
 
 const setItemFunc = (items, totalCount, totalPrice) => {
   localStorage.setItem('items', JSON.stringify(items))
