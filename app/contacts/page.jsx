@@ -4,6 +4,11 @@ import AddressIcon from '@/public/img/location.svg'
 import ClockIcon from '@/public/img/clock.svg'
 import Image from 'next/image'
 
+export const metadata = {
+  title: 'Шашлычный дом | Контакты',
+  description: 'Шашлычный дом, контктная информация',
+}
+
 const Contacts = () => {
   return (
     <div className='pt-6 w-full h-full flex flex-col'>

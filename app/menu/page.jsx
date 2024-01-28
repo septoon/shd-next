@@ -1,5 +1,9 @@
 import MenuCards from "../components/MenuCards";
 
+export const metadata = {
+  title: 'Шашлычный дом | Меню',
+  description: 'Шашлычный дом, меню',
+}
 
 export default function Menu() {
   return (

@@ -3,10 +3,12 @@ import Cash from '../../public/img/cash.svg'
 import CreditCard from '../../public/img/credit-card.svg'
 import Image from 'next/image'
 
+export const metadata = {
+  title: 'Шашлычный дом | Доставка',
+  description: 'Шашлычный дом, условия доставки и оплаты',
+}
+
 const Delivery = () => {
-
-
-  
   return (
     <div className='pt-6 pb-12 w-full flex flex-col items-start'>
       <h1 className="pl-6 text-title font-bold font-comfortaa mb-8">Доставка и оплата</h1>

@@ -7,6 +7,11 @@ import WashingIcon from '../../public/img/icons/Washing.png'
 
 import Image from 'next/image'
 
+export const metadata = {
+  title: 'Шашлычный дом | Вакансии',
+  description: 'Шашлычный дом, вакансии',
+}
+
 const Vacancies = () => {
   return (
     <div className='pt-6 w-full h-full flex flex-col'>
