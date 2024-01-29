@@ -10,8 +10,8 @@ export default function Home() {
           <span className='text-xl font-semibold my-3'>Бесплатная доставка от 1000 рублей</span>
           <span className='text-2xl font-semibold'>с 11:00 до 23:00 </span>
         </div>
-        <Link href="/menu" className="w-full">
-          <button className="w-auto bg-lightSlate-gray text-white text-xl px-4 py-2 rounded-2xl animate-pulse">
+        <Link href="/menu" className="w-[188px] border-2 rounded-2xl">
+          <button className="w-auto bg-lightSlate-gray text-white text-xl px-4 py-2 rounded-2xl">
             Перейти в меню
           </button>
         </Link>
