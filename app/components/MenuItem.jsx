@@ -33,7 +33,7 @@ const onAddDishes = (id, name, image, serving, options, price,) => {
             width={40}
             height={28}
             quality={100}
-            sizes="100%"
+            sizes="50%"
             className="rounded-md min-w-40 min-h-28 max-w-40 max-h-28 object-cover"
             alt="pic"
           />
