@@ -216,11 +216,11 @@ const Order = ({
               {orderType === 'Доставка' && (
                 <div className="flex flex-col mb-6" name="checkbox">
                   <label className="mb-3">Спооб оплаты:</label>
-                  <div className="mb-2">
+                  <div className="mb-2 pl-1">
                     <RadioButton inputId="cash" name="cash" value="Наличные" onChange={changeValue} checked={payValue === 'Наличные' ? true : false} />
                     <label htmlFor="cash" className="ml-2">Наличные</label>
                   </div>
-                  <div className="payment_method">
+                  <div className="pl-1">
                     <RadioButton inputId="cart" name="cart" value="Карта" onChange={changeValue} checked={payValue === 'Карта' ? true : false} />
                     <label htmlFor="cart" className="ml-2">Карта</label>
                   </div>

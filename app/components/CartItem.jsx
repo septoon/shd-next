@@ -38,9 +38,9 @@ const CartItem = ({
     onClickRemoveDish(dishObj);
   };
   return (
-    <div className="h-20 px-1.5 lg:px-3 flex justify-between items-center mb-2 bg-white font-comfortaa rounded-xl">
-      <div className="cart__item-img">
-        <Image className="min-w-10 max-w-10 lg:max-w-24 max-h-8 rounded-md" width={10} height={8} src={image} alt="картинка" />
+    <div className="h-20 px-1.5 lg:p-3 flex justify-between items-center mb-2 bg-white font-comfortaa rounded-xl">
+      <div className="">
+        <Image className="w-10 lg:w-[4rem] h-[90%] object-fill rounded-md" sizes='50%' width={10} height={8} src={image} alt="картинка" />
       </div>
       <div className="flex flex-col w-[30%]">
         <span className='text-[10px] md:text-[14px] lg:text-xl '>{name}</span>
@@ -62,7 +62,7 @@ const CartItem = ({
       </div>
       <div className="">
         <div className="" onClick={onRemoveDish}>
-          <Image src={Trash} className="w-4 h-4" width={4} height={4} alt="closeCart" />
+          <Image src={Trash} className="w-4 h-4 lg:w-6 lg:h-6" width={4} height={4} alt="closeCart" />
         </div>
       </div>
     </div>
