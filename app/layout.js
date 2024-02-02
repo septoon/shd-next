@@ -15,8 +15,8 @@ export const metadata = {
   description: 'Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13.',
   ogTitle: 'Шашлычный дом | Доставка еды', 
   ogDescription: 'Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13.', 
-  ogImage: {openGraphImage},
-  ogUrl: 'septon-test.ru',
+  ogImage: openGraphImage,
+  ogUrl: 'http://septon-test.ru',
 }
 
 export default function RootLayout({ children }) {
