@@ -8,16 +8,27 @@ import { PrimeReactProvider } from 'primereact/api';
 import SidebarNav from './components/SidebarNav'
 import MenuBtn from './components/MenuBtn'
 import MenuNav from './components/MenuNav';
+import openGraphImage from '../public/image.jpg'
 
 export const metadata = {
   title: 'Шашлычный дом',
-  description: 'Доставка шашлыка в Алуште. Наш адрес ул Ленина 13.',
+  description: 'Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13.',
+  ogTitle: 'Шашлычный дом | Доставка еды', 
+  ogDescription: 'Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13.', 
+  ogImage: {openGraphImage},
+  ogUrl: 'septon-test.ru',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <head>
+        <meta name="description" content={metadata.description} />
+        
+        <meta property="og:title" content={metadata.ogTitle} />
+        <meta property="og:description" content={metadata.ogDescription} />
+        <meta property="og:image" content={metadata.ogImage} />
+        <meta property="og:url" content={metadata.ogUrl} />
         <script
             dangerouslySetInnerHTML={{
               __html: `
