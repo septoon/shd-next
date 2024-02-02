@@ -30,7 +30,7 @@ const Cart = () => {
   const uniqueProducts = items.reduce((acc, current) => {
     // Проверяем, есть ли элемент с таким же id в массиве acc
     const isDuplicate = acc.find(
-      (item) => item.id === current.id && item.activeSize === current.activeSize,
+      (item) => item.id === current.id,
     );
     // Если элемент не найден, добавляем его в массив acc.
     if (!isDuplicate) {
@@ -183,7 +183,7 @@ const Cart = () => {
       });
   };
   return (
-    <div className="pt-6 w-full">
+    <div className="py-6 w-full">
       <h1 className="pl-6 text-title font-bold font-comfortaa">Корзина</h1>
       <Dialog
         header="Ваш заказ"
@@ -222,7 +222,7 @@ const Cart = () => {
         resizable={false}>
         <OrderFinish orderValues={orderValues} shortDate={shortDate} shortTime={shortTime} />
       </Dialog>
-      <div className="">
+      <div className="px-1">
         {items.length ? (
           // Если в корзине что-то есть
           <>
@@ -237,7 +237,7 @@ const Cart = () => {
                 <span>Очистить корзину</span>
               </div>
             </div>
-            <div className="px-2 max-h-[40dvh] overflow-y-auto">
+            <div className="px-2 h-auto pt-2 mb-6">
               {uniqueProducts.map((item, index) => {
                 const count = countById(items, item.id, item.activeSize);
 
@@ -254,7 +254,7 @@ const Cart = () => {
               })}
             </div>
             <div className="">
-              <div className="fixed bottom-[12%] left-0 w-full flex flex-col justify-between px-6 lg:pl-[20%] transition-all">
+              <div className="mb-3 w-full flex flex-col justify-between px-3 lg:pl-[20%] transition-all">
                 <span>
                   {' '}
                   Всего блюд:{' '}
@@ -265,14 +265,12 @@ const Cart = () => {
                   Сумма заказа: <b className="text-lightSlate-gray text-lg">{totalPrice} ₽</b>{' '}
                 </span>
               </div>
-              <div className="">
-                <div className="">
-                  <Button
-                    className="px-4 py-2 bg-lightSlate-gray text-white rounded-md fixed bottom-main-btn left-6 lg:left-[20%]"
-                    onClick={() => show('bottom')}
-                    label="Оформить заказ"
-                  />
-                </div>
+              <div className="w-full pl-3">
+                <Button
+                  className="px-4 py-2 bg-lightSlate-gray text-white rounded-md lg:ml-[20%]"
+                  onClick={() => show('bottom')}
+                  label="Оформить заказ"
+                />
               </div>
             </div>
           </>

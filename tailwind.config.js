@@ -73,6 +73,7 @@ module.exports = {
       'light-gray': '#D3D3D3',
       'lightSlate-gray': '#778899',
       'DimGray': '#696969',
+      'veryDark-gray': '#272822',
     }
   },
   plugins: [],

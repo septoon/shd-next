@@ -57,10 +57,6 @@ const SidebarNav = () => {
             <Image width="20" height="20" className="mr-4" src={VacanciesIcon} alt="vacancies" />
             <span>Вакансии</span>
           </Link>
-          <Link href="/history" className="flex items-center w-full" onClick={() => dispatch(setIsOpen(false))}>
-            <Image width="20" height="20" className="mr-4" src={HistoryIcon} alt="HistoryIcon" />
-            <span>История заказов</span>
-          </Link>
         </div>
       </div>
     </Sidebar>

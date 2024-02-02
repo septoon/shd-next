@@ -12,7 +12,7 @@ const Header = () => {
         <Image src={ShdTitle} alt="Шашлычный Дом" className='w-full max-w-[300px]' />
       </Link>
       <div className='flex items-center justify-between w-1/2 pl-2 pr-6'>
-        <Image src={ShdLogo} alt="logo" className='h-14 w-12 self-center' />
+        <Image src={ShdLogo} alt="logo" className='h-14 w-10 self-center' />
         <BurgerMenu />
       </div>
       

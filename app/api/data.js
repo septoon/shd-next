@@ -362,7 +362,7 @@ export const data = {
     },
     {
       image: "https://i.ibb.co/0c8t3WQ/IMG-4098.jpg",
-      name: "Ципленок на гриле",
+      name: "Цыпленок на гриле",
       options: "Цена за 100г",
       serving: 100,
       price: 240,
