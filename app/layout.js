@@ -8,7 +8,6 @@ import { PrimeReactProvider } from 'primereact/api';
 import SidebarNav from './components/SidebarNav'
 import MenuBtn from './components/MenuBtn'
 import MenuNav from './components/MenuNav';
-import openGraphImage from '../public/image.jpg'
 
 export const metadata = {
   title: 'Шашлычный дом',
@@ -25,13 +24,13 @@ export default function RootLayout({ children }) {
         <meta property="og:url" content="http://septon-test.ru" />
         <meta property="og:title" content="Шашлычный дом" />
         <meta property="og:description" content="Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13." />
-        <meta property="og:image" content="../public/image.jpg" />
+        <meta property="og:image" content="http://septon-test.ru/image.jpg" />
         
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="http://septon-test.ru" />
         <meta property="twitter:title" content="Шашлычный дом" />
         <meta property="twitter:description" content="Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13." />
-        <meta property="twitter:image" content="../public/image.jpg" />
+        <meta property="twitter:image" content="http://septon-test.ru/image.jpg" />
 
         <script
             dangerouslySetInnerHTML={{
