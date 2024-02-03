@@ -13,10 +13,6 @@ import openGraphImage from '../public/image.jpg'
 export const metadata = {
   title: 'Шашлычный дом',
   description: 'Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13.',
-  ogTitle: 'Шашлычный дом | Доставка еды', 
-  ogDescription: 'Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13.', 
-  ogImage: openGraphImage,
-  ogUrl: 'http://septon-test.ru',
 }
 
 export default function RootLayout({ children }) {
@@ -24,11 +20,19 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <head>
         <meta name="description" content={metadata.description} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://septon-test.ru" />
+        <meta property="og:title" content="Шашлычный дом" />
+        <meta property="og:description" content="Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13." />
+        <meta property="og:image" content="../public/image.jpg" />
         
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:image" content={metadata.ogImage} />
-        <meta property="og:url" content={metadata.ogUrl} />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="http://septon-test.ru" />
+        <meta property="twitter:title" content="Шашлычный дом" />
+        <meta property="twitter:description" content="Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13." />
+        <meta property="twitter:image" content="../public/image.jpg" />
+
         <script
             dangerouslySetInnerHTML={{
               __html: `
