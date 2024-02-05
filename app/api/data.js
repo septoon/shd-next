@@ -534,14 +534,6 @@ export const data = {
       isChange: false, 
       id: 41
     },
-    {
-      image: "https://i.ibb.co/gtk7QMq/energy.jpg",
-      name: "Энергетик Крым",
-      serving: "0.5л",
-      price: 220,
-      isChange: false, 
-      id: 42
-    },
   ],
   "Десерты": [
     {

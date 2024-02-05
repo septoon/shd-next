@@ -18,19 +18,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={metadata.description} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://septon-test.ru" />
+        <meta property="og:url" content="https://shashlichny-dom.ru" />
         <meta property="og:title" content="Шашлычный дом" />
         <meta property="og:description" content="Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13." />
-        <meta property="og:image" content="https://septon-test.ru/image.jpg" />
+        <meta property="og:image" content="https://shashlichny-dom.ru/image.jpg" />
         
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://septon-test.ru" />
+        <meta property="twitter:url" content="https://shashlichny-dom.ru" />
         <meta property="twitter:title" content="Шашлычный дом" />
         <meta property="twitter:description" content="Доставка вкусного шашлыка в Алуште. Бесплатная доставка от 1000 р. Наш адрес ул Ленина 13." />
-        <meta property="twitter:image" content="https://septon-test.ru/image.jpg" />
+        <meta property="twitter:image" content="https://shashlichny-dom.ru/image.jpg" />
 
         <script
             dangerouslySetInnerHTML={{
