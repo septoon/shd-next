@@ -27,7 +27,14 @@ const OrderFinish = ({ orderValues, shortDate, shortTime }) => {
               <span key={i.id} className="w-full text-sm">{`${i.name} | ${i.price} ₽. | x ${count} шт.`}</span>
             );
           })}
-          <span className="my-2"><b>Сумма:</b> {orderValues.totalPrice} ₽</span>
+          {
+            orderValues.totalPrice < 1000 && orderValues.orderType === 'Доставка' ? (
+              <span className="my-2"><b>Сумма:</b> {orderValues.totalPrice + 200} ₽</span>
+            ) : (
+              <span className="my-2"><b>Сумма:</b> {orderValues.totalPrice} ₽</span>
+            )
+          }
+          
           <span className="mb-2">
             <b>Дата:</b> {orderValues.checked ? shortDate : 'Сегодня'}
           </span>

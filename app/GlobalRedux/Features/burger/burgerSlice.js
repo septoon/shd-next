@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -9,14 +9,11 @@ const burgerSlice = createSlice({
   },
   reducers: {
     setIsOpen: (state, action) => {
-      state.isOpen = action.payload
+      state.isOpen = action.payload;
     },
-    
   },
 });
 
-export const {
-  setIsOpen,
-} = burgerSlice.actions;
+export const { setIsOpen } = burgerSlice.actions;
 
 export default burgerSlice.reducer;

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react';
 
@@ -97,11 +97,21 @@ const Order = ({
 
   const load = () => {
     setLoading(true);
-    sendOrder(orderType, address, phoneNum, commentValue, dishesList.toString(), items, countById, totalItems, payValue);
+    sendOrder(
+      orderType,
+      address,
+      phoneNum,
+      commentValue,
+      dishesList.toString(),
+      items,
+      countById,
+      totalItems,
+      payValue,
+    );
     setTimeout(() => {
       setLoading(false);
       setVisible(false);
-      setIsOrderFinish(true)
+      setIsOrderFinish(true);
     }, 1000);
   };
   return (
@@ -141,22 +151,28 @@ const Order = ({
             })}
           </div>
           <div className="flex flex-col">
-            {
-              totalPrice < 1000 && orderType === 'Доставка' ? (
-                <>
-                  <span className="mb-2  text-[12px]">
-                    Стоимость товаров: <b className="text-lightSlate-gray">{totalPrice}</b> ₽
-                  </span>
-                  <span className='mb-2 text-[12px]'>Стоимость доставки: <b className="text-lightSlate-gray">200</b> ₽</span>
-                  <span className='mb-6'>Итого: <b className="text-lightSlate-gray">{totalPrice + 200}</b> ₽</span>
-                </>
-              ) : (
-                <span className="mb-6">
-                  Итого: <b className="text-lightSlate-gray">{totalPrice < 1000 && orderType === 'Доставка' ? totalPrice + 200 : totalPrice}</b> ₽
+            {totalPrice < 1000 && orderType === 'Доставка' ? (
+              <>
+                <span className="mb-2  text-[12px]">
+                  Стоимость товаров: <b className="text-lightSlate-gray">{totalPrice}</b> ₽
                 </span>
-                )
-            }
-            
+                <span className="mb-2 text-[12px]">
+                  Стоимость доставки: <b className="text-lightSlate-gray">200</b> ₽
+                </span>
+                <span className="mb-6">
+                  Итого: <b className="text-lightSlate-gray">{totalPrice + 200}</b> ₽
+                </span>
+              </>
+            ) : (
+              <span className="mb-6">
+                Итого:{' '}
+                <b className="text-lightSlate-gray">
+                  {totalPrice < 1000 && orderType === 'Доставка' ? totalPrice + 200 : totalPrice}
+                </b>{' '}
+                ₽
+              </span>
+            )}
+
             <div className="flex-auto w-auto">
               <div className="w-full flex justify-between">
                 <label htmlFor="calendar-24h" className="font-bold block mb-2">
@@ -194,7 +210,7 @@ const Order = ({
             <label className="mb-1">Введите ваш номер телефона:</label>
             <InputMask
               value={phoneMaskValue}
-              type='tel'
+              type="tel"
               className="w-[60%]"
               onChange={(e) => {
                 setPhoneMaskValue(e.target.value);
@@ -213,29 +229,45 @@ const Order = ({
                 placeholder="Например: без лука"
               />
             </div>
-              {orderType === 'Доставка' && (
-                <div className="flex flex-col mb-6" name="checkbox">
-                  <label className="mb-3">Спооб оплаты:</label>
-                  <div className="mb-2 pl-1">
-                    <RadioButton inputId="cash" name="cash" value="Наличные" onChange={changeValue} checked={payValue === 'Наличные' ? true : false} />
-                    <label htmlFor="cash" className="ml-2">Наличные</label>
-                  </div>
-                  <div className="pl-1">
-                    <RadioButton inputId="cart" name="cart" value="Карта" onChange={changeValue} checked={payValue === 'Карта' ? true : false} />
-                    <label htmlFor="cart" className="ml-2">Карта</label>
-                  </div>
+            {orderType === 'Доставка' && (
+              <div className="flex flex-col mb-6" name="checkbox">
+                <label className="mb-3">Спооб оплаты:</label>
+                <div className="mb-2 pl-1">
+                  <RadioButton
+                    inputId="cash"
+                    name="cash"
+                    value="Наличные"
+                    onChange={changeValue}
+                    checked={payValue === 'Наличные' ? true : false}
+                  />
+                  <label htmlFor="cash" className="ml-2">
+                    Наличные
+                  </label>
                 </div>
-              )}
-            
+                <div className="pl-1">
+                  <RadioButton
+                    inputId="cart"
+                    name="cart"
+                    value="Карта"
+                    onChange={changeValue}
+                    checked={payValue === 'Карта' ? true : false}
+                  />
+                  <label htmlFor="cart" className="ml-2">
+                    Карта
+                  </label>
+                </div>
+              </div>
+            )}
+
             <Button
-                label="Заказать"
-                disabled={orderType === 'Доставка' ? !phoneMaskValue || !address : !phoneMaskValue}
-                icon="pi pi-check"
-                loading={loading}
-                onClick={load}
-                iconPos="right"
-                className=" w-auto h-auto px-4 py-2"
-              />
+              label="Заказать"
+              disabled={orderType === 'Доставка' ? !phoneMaskValue || !address : !phoneMaskValue}
+              icon="pi pi-check"
+              loading={loading}
+              onClick={load}
+              iconPos="right"
+              className=" w-auto h-auto px-4 py-2"
+            />
           </div>
         </div>
       </div>

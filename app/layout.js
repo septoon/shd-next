@@ -21,7 +21,8 @@ export default function RootLayout({ children }) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={metadata.description} />
-
+        <meta name="yandex-verification" content="78aa700c47bf7bf0" />
+        <meta name="google-site-verification" content="et7FgAkduvH-MnEIr8xMcwPIO216XHQhmPvcTg778Rk" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://shashlichny-dom.ru" />
         <meta property="og:title" content="Шашлычный дом" />

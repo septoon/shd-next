@@ -125,7 +125,7 @@ const Cart = () => {
     Заказ # ${ordersCount}
     ${orderType}
     ${dishes.toString()}
-    Сумма: ${totalPrice}
+    Сумма: ${totalPrice < 1000 ? totalPrice + 200 : totalPrice}
     Адрес Доставки: ${address}
     Номер телефона: ${phoneNumber}
             ${
@@ -254,7 +254,7 @@ const Cart = () => {
               })}
             </div>
             <div className="">
-              <div className="mb-3 w-full flex flex-col justify-between px-3 lg:pl-[20%] transition-all">
+              <div className="mb-3 w-full flex flex-col justify-between px-3 transition-all">
                 <span>
                   {' '}
                   Всего блюд:{' '}
@@ -267,7 +267,7 @@ const Cart = () => {
               </div>
               <div className="w-full pl-3">
                 <Button
-                  className="px-4 py-2 bg-lightSlate-gray text-white rounded-md lg:ml-[20%]"
+                  className="px-4 py-2 bg-lightSlate-gray text-white rounded-md"
                   onClick={() => show('bottom')}
                   label="Оформить заказ"
                 />

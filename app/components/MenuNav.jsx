@@ -29,7 +29,14 @@ const MenuNav = () => {
       <div className="w-full flex justify-start relative bg-white font-comfortaa font-bold items-start rounded-t-lg h-half-screen pb-10">
         <div className="w-[22px] mr-2.5 pt-1">
           {icons.map((item, index) => (
-            <Image src={item.icon} alt="icon" width={20} height={20} className="w-auto mb-4" key={index} />
+            <Image
+              src={item.icon}
+              alt="icon"
+              width={20}
+              height={20}
+              className="w-auto mb-4"
+              key={index}
+            />
           ))}
         </div>
         <div className="flex flex-col items-start">

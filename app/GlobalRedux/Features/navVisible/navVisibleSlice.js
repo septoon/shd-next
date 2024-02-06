@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -9,14 +9,11 @@ const navVisibleSlice = createSlice({
   },
   reducers: {
     setNavVisible: (state, action) => {
-      state.navVisible = action.payload
+      state.navVisible = action.payload;
     },
-    
   },
 });
 
-export const {
-  setNavVisible,
-} = navVisibleSlice.actions;
+export const { setNavVisible } = navVisibleSlice.actions;
 
 export default navVisibleSlice.reducer;
