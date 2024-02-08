@@ -4,18 +4,40 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { data } from '../api/data';
 import { setItem } from '../GlobalRedux/Features/item/itemSlice';
 import { setCatalogName } from '../GlobalRedux/Features/catalogName/catalogNameSlice';
+import { useEffect, useState } from 'react';
 
 const MenuCards = () => {
+  const [menuData, setMenuData] = useState({});
   const dispatch = useDispatch();
 
   const handleClick = (category) => {
     dispatch(setItem(data[category]));
     dispatch(setCatalogName(category));
   };
+  console.log(menuData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/data.json');
+
+        if (response.status === 200) {
+          setMenuData(response.data);
+        } else {
+          console.error('Ошибка при получении данных с сервера');
+        }
+      } catch (error) {
+        console.error('Ошибка при выполнении GET-запроса:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="flex flex-wrap">

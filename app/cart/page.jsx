@@ -1,11 +1,16 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { clearDishCart, removeDish, decrementDish, incrementDish } from '../GlobalRedux/Features/cart/cartSlice';
+import {
+  clearDishCart,
+  removeDish,
+  decrementDish,
+  incrementDish,
+} from '../GlobalRedux/Features/cart/cartSlice';
 
 import Trash from '../../public/img/trash.svg';
 import CartIcon from '@/public/img/cart-logo.svg';
@@ -29,9 +34,7 @@ const Cart = () => {
   // Создаем новый массив уникальных элементов, используя метод reduce().
   const uniqueProducts = items.reduce((acc, current) => {
     // Проверяем, есть ли элемент с таким же id в массиве acc
-    const isDuplicate = acc.find(
-      (item) => item.id === current.id,
-    );
+    const isDuplicate = acc.find((item) => item.id === current.id);
     // Если элемент не найден, добавляем его в массив acc.
     if (!isDuplicate) {
       acc.push(current);

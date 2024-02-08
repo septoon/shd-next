@@ -53,7 +53,6 @@ export default function RootLayout({ children }) {
               <Header />
               <SidebarNav />
               {children}
-              <MenuBtn />
               <MenuNav />
             </PrimeReactProvider>
           </Providers>

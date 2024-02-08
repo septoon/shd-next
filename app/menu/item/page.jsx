@@ -1,5 +1,6 @@
 'use client'
 
+import MenuBtn from '@/app/components/MenuBtn';
 import MenuItem from '@/app/components/MenuItem';
 import ToCartButton from '@/app/components/ToCartButton';
 import { useSelector } from 'react-redux';
@@ -22,6 +23,7 @@ const page = () => {
         )
       }
       <MenuItem />
+      <MenuBtn/>
       <ToCartButton />
     </div>
   )
