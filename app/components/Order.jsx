@@ -226,7 +226,7 @@ const Order = ({
                 value={commentValue}
                 className="w-[60%]"
                 onChange={handleCommentChange}
-                placeholder="Например: без лука"
+                placeholder="Комментарий"
               />
             </div>
             {orderType === 'Доставка' && (

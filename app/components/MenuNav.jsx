@@ -10,12 +10,30 @@ import { setItem } from '../GlobalRedux/Features/item/itemSlice';
 import { setCatalogName } from '../GlobalRedux/Features/catalogName/catalogNameSlice';
 
 import { icons } from '../api/icons';
-import { data } from '../api/data';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const MenuNav = () => {
   const navVisible = useSelector((state) => state.navVisible.navVisible);
   const position = useSelector((state) => state.position.position);
   const dispatch = useDispatch();
+
+  const [menuData, setMenuData] = useState({});
+
+  const isBrowser = typeof window !== 'undefined';
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://admin.septon-test.ru/getData');
+        isBrowser && setMenuData(response.data);
+      } catch (error) {
+        console.error('Ошибка при выполнении GET-запроса:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Dialog
@@ -40,13 +58,13 @@ const MenuNav = () => {
           ))}
         </div>
         <div className="flex flex-col items-start">
-          {Object.keys(data).map((category, index) => (
+          {Object.keys(menuData).map((category, index) => (
             <Link href="/menu/item" key={index} className="mb-2">
               <button
                 className="text-dark text-xl font-semibold w-full"
                 onClick={(e) => {
                   dispatch(setNavVisible(false));
-                  dispatch(setItem(data[category]));
+                  dispatch(setItem(menuData[category]));
                   dispatch(setCatalogName(category));
                 }}>
                 {category}

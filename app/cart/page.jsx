@@ -25,7 +25,9 @@ import CartItem from '../components/CartItem';
 const Cart = () => {
   const dispatch = useDispatch();
 
-  const { items, totalCount, totalPrice } = useSelector(({ cart }) => ({
+  const isBrowser = typeof window !== 'undefined';
+
+  const { items, totalCount, totalPrice } = isBrowser && useSelector(({ cart }) => ({
     items: cart.items,
     totalPrice: cart.totalPrice,
     totalCount: cart.totalCount,

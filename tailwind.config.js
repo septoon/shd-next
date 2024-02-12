@@ -34,7 +34,7 @@ module.exports = {
       backgroundImage: {
         'shd': "url('/img/bg-shd.jpg')",
         'menu': "url('/img/menu-icon.png')",
-        'main': "url('/img/bg-main2.JPG')",
+        'main': "url('/img/bg-main.webp')",
       },
       backgroundPosition: {
         bottom: 'bottom',

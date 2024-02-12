@@ -6,31 +6,22 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import { data } from '../api/data';
 import { setItem } from '../GlobalRedux/Features/item/itemSlice';
 import { setCatalogName } from '../GlobalRedux/Features/catalogName/catalogNameSlice';
 import { useEffect, useState } from 'react';
 
 const MenuCards = () => {
-  const [menuData, setMenuData] = useState({});
   const dispatch = useDispatch();
 
-  const handleClick = (category) => {
-    dispatch(setItem(data[category]));
-    dispatch(setCatalogName(category));
-  };
-  console.log(menuData);
+  const [menuData, setMenuData] = useState({});
+
+  const isBrowser = typeof window !== 'undefined';
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/data.json');
-
-        if (response.status === 200) {
-          setMenuData(response.data);
-        } else {
-          console.error('Ошибка при получении данных с сервера');
-        }
+        const response = await axios.get('https://admin.septon-test.ru/getData');
+        isBrowser && setMenuData(response.data);
       } catch (error) {
         console.error('Ошибка при выполнении GET-запроса:', error);
       }
@@ -39,9 +30,14 @@ const MenuCards = () => {
     fetchData();
   }, []);
 
+  const handleClick = (category) => {
+    dispatch(setItem(menuData[category]));
+    dispatch(setCatalogName(category));
+  };
+  console.log(Object.keys(menuData)[0]);
   return (
     <div className="flex flex-wrap">
-      {Object.keys(data).map((category, index) => (
+      {Object.keys(menuData).map((category, index) => (
         <Link
           href="/menu/item"
           key={index}
@@ -50,7 +46,7 @@ const MenuCards = () => {
             handleClick(category);
           }}>
           <Image
-            src={data[category][0].image}
+            src={menuData[category][0].image}
             width={40}
             height={28}
             sizes="50%"
