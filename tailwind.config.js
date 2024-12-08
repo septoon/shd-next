@@ -62,6 +62,7 @@ module.exports = {
       'dark': "#1d1d1d",
       'transparent': 'transparent',
       'white': '#ffffff',
+      'red-500': '#ff4d4f',
       'purple': '#3f3cbb',
       'midnight': '#121063',
       'metal': '#565584',
