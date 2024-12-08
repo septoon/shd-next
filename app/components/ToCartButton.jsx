@@ -7,7 +7,7 @@ import Image from 'next/image'
 import CartIcon from '@/public/img/shopping-cart.svg';
 
 const ToCartButton = () => {
-  const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined';
   const { items, totalCount, totalPrice } = isBrowser && useSelector(({ cart }) => ({
     items: cart.items,
     totalPrice: cart.totalPrice,

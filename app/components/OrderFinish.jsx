@@ -1,80 +1,59 @@
-'use client'
+'use client';
 
+import React from 'react';
 
 const OrderFinish = ({ orderValues, shortDate, shortTime }) => {
+  const { orderType, address, phoneNumber, comment, items, paid, totalPrice, totalWithDeliveryPrice, pay, checked } = orderValues;
+
   return (
-    <>
-      {orderValues.orderType === 'Доставка' ? (
-        <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col">
+      <span className="mb-2">
+        <b>Тип заказа: </b> {orderType}
+      </span>
+      {orderType === 'Доставка' && (
+        <>
           <span className="mb-2">
-            <b>Тип заказа: </b> {orderValues.orderType}
+            <b>Адрес:</b> {address}
           </span>
           <span className="mb-2">
-            <b>Адрес:</b> {orderValues.address}
+            <b>Способ оплаты:</b> {pay ? pay : 'Не выбран'}
           </span>
-          <span className="mb-2">
-            <b>Номер телефона:</b> {orderValues.phoneNumber}
-          </span>
-          <span className="mb-2">
-            <b>Комментарий:</b> {orderValues.comment ? orderValues.comment : 'Не указан'}
-          </span>
-          <span className="mb-2">
-            <b>Заказ:</b>
-          </span>
-          {orderValues.items.map((i) => {
-            const count = orderValues.countById(orderValues.totalItems, i.id, i.activeSize);
-            return (
-              <span key={i.id} className="w-full text-sm">{`${i.name} | ${i.price} ₽. | x ${count} шт.`}</span>
-            );
-          })}
-          {
-            orderValues.totalPrice < 1000 && orderValues.orderType === 'Доставка' ? (
-              <span className="my-2"><b>Сумма:</b> {orderValues.totalPrice + 200} ₽</span>
-            ) : (
-              <span className="my-2"><b>Сумма:</b> {orderValues.totalPrice} ₽</span>
-            )
-          }
-          
-          <span className="mb-2">
-            <b>Дата:</b> {orderValues.checked ? shortDate : 'Сегодня'}
-          </span>
-          <span className="mb-2">
-            <b>Время:</b> {orderValues.checked ? shortTime : 'Ближайшее'}
-          </span>
-          <span className="mb-2">
-            <b>Способ оплаты:</b> {orderValues.pay ? orderValues.pay : 'Не выбран'}
-          </span>
-        </div>
-      ) : (
-        <div className="w-full flex flex-col">
-          <span className="mb-2">
-            <b>Тип заказа: </b> {orderValues.orderType}
-          </span>
-          <span className="mb-2">
-            <b>Номер телефона:</b> {orderValues.phoneNumber}
-          </span>
-          <span className="mb-2">
-            <b>Комментарий:</b> {orderValues.comment ? orderValues.comment : 'Не указан'}
-          </span>
-          <span className="mb-2">
-            <b>Заказ:</b>
-          </span>
-          {orderValues.items.map((i) => {
-            const count = orderValues.countById(orderValues.totalItems, i.id, i.activeSize);
-            return (
-              <span key={i.id} className="w-full text-sm">{`${i.name} | ${i.price} ₽. | x ${count} шт.`}</span>
-            );
-          })}
-          <span className="my-2"><b>Сумма:</b> {orderValues.totalPrice}  ₽</span>
-          <span className="mb-2">
-            <b>Дата:</b> {orderValues.checked ? shortDate : 'Сегодня'}
-          </span>
-          <span className="mb-2">
-            <b>Время:</b> {orderValues.checked ? shortTime : 'Ближайшее'}
-          </span>
-        </div>
+        </>
       )}
-    </>
+      <span className="mb-2">
+        <b>Номер телефона:</b> {phoneNumber}
+      </span>
+      <span className="mb-2">
+        <b>Комментарий:</b> {comment ? comment : 'Не указан'}
+      </span>
+      <span className="mb-2">
+        <b>Заказ:</b>
+      </span>
+      {items.map((i) => (
+        <span key={i.id} className="w-full text-sm">
+          {`${i.name} | ${i.price} ₽. | x ${i.quantity}${
+            typeof i.serving === 'number' ? '00г.' : 'шт.'
+          }`}
+        </span>
+      ))}
+        {
+          paid ? (
+          <span className="my-2">
+            <b>Сумма с учетом доставки:</b> {totalWithDeliveryPrice} ₽
+          </span>
+          ) : (
+          <span className="my-2">
+            <b>Сумма:</b> {totalPrice} ₽
+          </span>
+          )
+        }
+      <span className="mb-2">
+        <b>Дата:</b> {checked ? shortDate : 'Сегодня'}
+      </span>
+      <span className="mb-2">
+        <b>Время:</b> {checked ? shortTime : 'Ближайшее'}
+      </span>
+    </div>
   );
 };
 

@@ -3,50 +3,48 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-import { setItem } from '../GlobalRedux/Features/item/itemSlice';
+import { setItem, fetchData } from '../GlobalRedux/Features/item/itemSlice';
 import { setCatalogName } from '../GlobalRedux/Features/catalogName/catalogNameSlice';
-import { useEffect, useState } from 'react';
 
 const MenuCards = () => {
   const dispatch = useDispatch();
 
-  const [menuData, setMenuData] = useState({});
-
-  const isBrowser = typeof window !== 'undefined';
+  const data = useSelector((state) => state.item.data);
+  const status = useSelector((state) => state.item.status);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://admin.septon-test.ru/getData');
-        isBrowser && setMenuData(response.data);
-      } catch (error) {
-        console.error('Ошибка при выполнении GET-запроса:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    if (status === 'idle') {
+      dispatch(fetchData());
+    }
+  }, [status, dispatch]);
 
   const handleClick = (category) => {
-    dispatch(setItem(menuData[category]));
+    dispatch(setItem(data[category]));
     dispatch(setCatalogName(category));
   };
-  console.log(Object.keys(menuData)[0]);
+
+  if (status === 'loading') {
+    return <div>Загрузка...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Ошибка при загрузке данных.</div>;
+  }
+
   return (
     <div className="flex flex-wrap">
-      {Object.keys(menuData).map((category, index) => (
+      {Object.keys(data).map((category, index) => (
         <Link
           href="/menu/item"
           key={index}
           className="text-dark text-md font-semibold w-[50%] mb-3 flex flex-col items-center justify-around"
-          onClick={(e) => {
-            handleClick(category);
-          }}>
+          onClick={() => handleClick(category)}
+        >
           <Image
-            src={menuData[category][0].image}
+            src={data[category][0].image}
             width={40}
             height={28}
             sizes="50%"
