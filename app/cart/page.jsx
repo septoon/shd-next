@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Image from 'next/image';
 
 import {
+  setInitialCartState,
   clearDishCart,
   removeDish,
   decrementDish,
-  incrementDish,
+  addDishToCart,
 } from '../GlobalRedux/Features/cart/cartSlice';
 
 import Trash from '../../public/img/trash.svg';
@@ -25,39 +26,35 @@ import CartItem from '../components/CartItem';
 const Cart = () => {
   const dispatch = useDispatch();
 
-  const isBrowser = typeof window !== 'undefined';
+  // Загрузка данных из localStorage на клиенте
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedItems = localStorage.getItem('items');
+      const savedTotalCount = localStorage.getItem('totalCount');
+      const savedTotalPrice = localStorage.getItem('totalPrice');
 
-  const { items, totalCount, totalPrice } = isBrowser && useSelector(({ cart }) => ({
-    items: cart.items,
-    totalPrice: cart.totalPrice,
-    totalCount: cart.totalCount,
+      if (savedItems && savedTotalCount && savedTotalPrice) {
+        dispatch(
+          setInitialCartState({
+            items: JSON.parse(savedItems),
+            totalCount: parseInt(savedTotalCount, 10),
+            totalPrice: parseFloat(savedTotalPrice),
+          })
+        );
+      }
+    }
+  }, [dispatch]);
+
+  const { items, totalCount, totalPrice } = useSelector((state) => ({
+    items: state.cart.items,
+    totalCount: state.cart.totalCount,
+    totalPrice: state.cart.totalPrice,
   }));
 
-  // Создаем новый массив уникальных элементов, используя метод reduce().
-  const uniqueProducts = items.reduce((acc, current) => {
-    // Проверяем, есть ли элемент с таким же id в массиве acc
-    const isDuplicate = acc.find((item) => item.id === current.id);
-    // Если элемент не найден, добавляем его в массив acc.
-    if (!isDuplicate) {
-      acc.push(current);
-    }
-    // Возвращаем массив acc на каждой итерации
-    return acc;
-  }, []);
-
-  const countById = (items, id, activeSize) => {
-    return items.reduce((count, i) => {
-      if (i.id === id && i.activeSize === activeSize) {
-        return count + 1;
-      }
-      return count;
-    }, 0);
-  };
-
   const [isOrderFinish, setIsOrderFinish] = useState(false);
-
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState('center');
+
   const show = (position) => {
     setPosition(position);
     setVisible(true);
@@ -66,7 +63,7 @@ const Cart = () => {
   const footerContent = (
     <div className="flex justify-between items-center">
       <span className="text-sm text-left w-1/2">
-        В течение 10-ти минут с вами свяжется оператор, для подтверждения заказа.
+        В течение 10-ти минут с вами свяжется оператор для подтверждения заказа.
       </span>
       <Button
         label="Ok"
@@ -90,8 +87,7 @@ const Cart = () => {
   };
 
   const onClickPlusDish = (dishObj) => {
-    dispatch(incrementDish(dishObj));
-    console.log(items);
+    dispatch(addDishToCart(dishObj));
   };
 
   const [datetime24h, setDateTime24h] = useState(new Date());
@@ -120,73 +116,51 @@ const Cart = () => {
     comment,
     dishes,
     items,
-    countById,
-    totalItems,
+    paid,
+    totalPrice,
+    totalWithDeliveryPrice,
     pay,
+    checked
   ) => {
-    let message =
+    const message =
       orderType === 'Доставка'
         ? `
-    Заказ # ${ordersCount}
-    ${orderType}
-    ${dishes.toString()}
-    Сумма: ${totalPrice < 1000 ? totalPrice + 200 : totalPrice}
-    Адрес Доставки: ${address}
-    Номер телефона: ${phoneNumber}
-            ${
-              checked
-                ? `
-    Дата доставки: ${shortDate}
-    Время доставки: ${shortTime}`
-                : `
-    Дата доставки: Сегодня
-    Время доставки: Сейчас`
-            }
-    Комментарий: ${comment}
-    Способ оплаты: ${pay}
-          `
-        : `Заказ # ${ordersCount}
-    ${orderType}
-    ${dishes.toString()}
-    Сумма: ${totalPrice}
-    Номер телефона: ${phoneNumber}
-            ${
-              checked
-                ? `
-    Дата доставки: ${shortDate}
-    Время доставки: ${shortTime}`
-                : `
-    Дата доставки: Сегодня
-    Время доставки: Сейчас`
-            }
-          `;
+Заказ # ${ordersCount}\n\n${orderType}\n\n${dishes}\n\nСумма: ${paid ? totalWithDeliveryPrice : totalPrice} ₽\nАдрес Доставки: ${address}\nНомер телефона: ${phoneNumber}\n\n${
+            checked
+              ? `Дата доставки: ${shortDate}\nВремя доставки: ${shortTime}`
+              : `Дата доставки: Сегодня\nВремя доставки: Сейчас`
+          }\nКомментарий: ${comment}\nСпособ оплаты: ${pay ? pay : 'Не выбран'}`
+        : `Заказ # ${ordersCount}\n\n${orderType}\n\n${dishes}\n\nСумма: ${totalPrice} ₽\nНомер телефона: ${phoneNumber}\n${
+            checked
+              ? `Дата: ${shortDate}\nВремя: ${shortTime}`
+              : `Дата: Сегодня\nВремя: Сейчас`
+          }\nКомментарий: ${comment}`;
+
     setOrderValues({
       orderType,
       address,
       phoneNumber,
       comment,
       dishes,
+      paid,
       totalPrice,
+      totalWithDeliveryPrice,
       items,
-      countById,
-      totalItems,
       pay,
+      checked,
     });
-    await axios
-      .post(
-        'https://api.telegram.org/bot6449386041:AAGzqG0r-R9AJFcY0EeV0vv6XBjFNDx_7xE/sendMessage',
-        {
-          chat_id: '-1001929441485',
-          text: message,
-        },
-      )
-      .then((res) => {
-        onClickClearCart();
-      })
-      .catch((err) => {
-        console.warn(err);
+
+    try {
+      await axios.post(`https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TOKEN}/sendMessage`, {
+        chat_id: process.env.NEXT_PUBLIC_CHAT_ID,
+        text: message,
       });
+      onClickClearCart();
+    } catch (err) {
+      console.warn(err);
+    }
   };
+
   return (
     <div className="py-6 w-full">
       <h1 className="pl-6 text-title font-bold font-comfortaa">Корзина</h1>
@@ -197,7 +171,8 @@ const Cart = () => {
         className="w-screen lg:w-[40vw]"
         onHide={() => setVisible(false)}
         draggable={false}
-        resizable={false}>
+        resizable={false}
+      >
         <Order
           checked={checked}
           setChecked={setChecked}
@@ -206,9 +181,7 @@ const Cart = () => {
           setDateTime24h={setDateTime24h}
           setVisible={setVisible}
           onClickClearCart={onClickClearCart}
-          countById={countById}
-          totalItems={items}
-          items={uniqueProducts}
+          items={items}
           totalCount={totalCount}
           totalPrice={totalPrice}
           sendOrder={sendOrder}
@@ -224,50 +197,47 @@ const Cart = () => {
         footer={footerContent}
         onHide={() => setIsOrderFinish(false)}
         draggable={false}
-        resizable={false}>
+        resizable={false}
+      >
         <OrderFinish orderValues={orderValues} shortDate={shortDate} shortTime={shortTime} />
       </Dialog>
       <div className="px-1">
-        {items.length ? (
+        {items && items.length ? (
           // Если в корзине что-то есть
           <>
             <div className="w-full flex justify-end text-lightSlate-gray pr-6">
               <div
-                className="flex mt-2 mb-4"
+                className="flex mt-2 mb-4 cursor-pointer"
                 onClick={() => {
                   let popup = window.confirm('Вы уверены, что хотите очистить корзину?');
                   popup && dispatch(clearDishCart());
-                }}>
+                }}
+              >
                 <Image className="text-lightSlate-gray" src={Trash} alt="trash" />
                 <span>Очистить корзину</span>
               </div>
             </div>
             <div className="px-2 h-auto pt-2 mb-6">
-              {uniqueProducts.map((item, index) => {
-                const count = countById(items, item.id, item.activeSize);
-
-                return (
-                  <CartItem
-                    key={index}
-                    countById={count}
-                    onClickMinusDish={() => onClickMinusDish({ dishId: item.id })}
-                    onClickPlusDish={() => onClickPlusDish({ dishId: item.id })}
-                    onClickRemoveDish={() => onClickRemoveDish({ dishId: item.id })}
-                    {...item}
-                  />
-                );
-              })}
+              {items.map((item, index) => (
+                <CartItem
+                  key={index}
+                  item={item}
+                  onClickMinusDish={() =>
+                    onClickMinusDish({ id: item.id, price: item.price })
+                  }
+                  onClickPlusDish={() => onClickPlusDish(item)}
+                  onClickRemoveDish={() => onClickRemoveDish({ id: item.id })}
+                />
+              ))}
             </div>
             <div className="">
               <div className="mb-3 w-full flex flex-col justify-between px-3 transition-all">
                 <span>
-                  {' '}
                   Всего блюд:{' '}
-                  <b className="font-bold text-lg text-lightSlate-gray">{totalCount} шт.</b>{' '}
+                  <b className="font-bold text-lg text-lightSlate-gray">{totalCount} шт.</b>
                 </span>
                 <span>
-                  {' '}
-                  Сумма заказа: <b className="text-lightSlate-gray text-lg">{totalPrice} ₽</b>{' '}
+                  Сумма заказа: <b className="text-lightSlate-gray text-lg">{totalPrice} ₽</b>
                 </span>
               </div>
               <div className="w-full pl-3">
@@ -285,13 +255,13 @@ const Cart = () => {
             <h2 className="mb-6 self-start">Корзина пустая</h2>
             <Image src={CartIcon} className="opacity-50 w-1/2 max-w-[300px]" alt="cart" />
             <span className="mt-6">
-              Вероятней всего, вы еще ничего не заказали. Для того, чтобы сделать заказ, перейди на
+              Вероятней всего, вы ещё ничего не заказали. Для того, чтобы сделать заказ, перейдите на
               страницу меню.
             </span>
             <Link href="/menu" className="">
               <Button
                 className="px-4 py-2 bg-lightSlate-gray text-white rounded-md fixed bottom-main-btn left-6 lg:left-[20%]"
-                label="Вернуться назад"
+                label="Вернуться в меню"
               />
             </Link>
           </div>

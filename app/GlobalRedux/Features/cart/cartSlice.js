@@ -1,86 +1,108 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const isBrowser = typeof window !== 'undefined';
-
+// Function to save cart data to localStorage
 const setItemFunc = (items, totalCount, totalPrice) => {
-  localStorage.setItem('items', JSON.stringify(items))
-  localStorage.setItem('totalCount', JSON.stringify(totalCount))
-  localStorage.setItem('totalPrice', JSON.stringify(totalPrice))
-}
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('items', JSON.stringify(items));
+    localStorage.setItem('totalCount', JSON.stringify(totalCount));
+    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+  }
+};
+
+// Initial state without accessing window or localStorage
+const initialState = {
+  items: [],
+  totalCount: 0,
+  totalPrice: 0,
+};
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState: {
-    items: isBrowser ? (window.localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []) : [],
-    totalCount: isBrowser ? (window.localStorage.getItem('totalCount') ? JSON.parse(localStorage.getItem('totalCount')) : 0) : 0,
-    totalPrice: isBrowser ? (window.localStorage.getItem('totalPrice') ? JSON.parse(localStorage.getItem('totalPrice')) : 0) : 0,
-  },
+  initialState,
   reducers: {
-    addDishToCart: (state, action) => {
-      state.items.push({ ...action.payload, quantity: 1 });
-      state.totalCount += 1;
-      state.totalPrice += parseInt(action.payload.price);
-
-      setItemFunc(state.items.map(item => item), state.totalCount, state.totalPrice)
+    // Set initial cart state from localStorage
+    setInitialCartState: (state, action) => {
+      state.items = action.payload.items || [];
+      state.totalCount = action.payload.totalCount || 0;
+      state.totalPrice = action.payload.totalPrice || 0;
     },
+    // Add dish to cart
+    addDishToCart: (state, action) => {
+      const { id, name, price, image, options, serving, weight } = action.payload;
+      const existingItem = state.items.find(item => item.id === id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.items.push({
+          id,
+          name,
+          price: parseFloat(price),
+          image,
+          options,
+          serving,
+          weight,
+          quantity: 1,
+        });
+      }
+      state.totalCount += 1;
+      state.totalPrice += parseFloat(price);
+
+      // Save updated cart state to localStorage
+      setItemFunc(state.items, state.totalCount, state.totalPrice);
+    },
+    // Decrement dish quantity
+    decrementDish: (state, action) => {
+      const { id, price } = action.payload;
+      const existingItem = state.items.find(item => item.id === id);
+
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+          state.totalCount -= 1;
+          state.totalPrice -= parseFloat(price);
+        } else {
+          state.items = state.items.filter(item => item.id !== id);
+          state.totalCount -= 1;
+          state.totalPrice -= parseFloat(price);
+        }
+      }
+
+      // Save updated cart state to localStorage
+      setItemFunc(state.items, state.totalCount, state.totalPrice);
+    },
+    // Remove dish from cart
+    removeDish: (state, action) => {
+      const { id } = action.payload;
+      const existingItem = state.items.find(item => item.id === id);
+
+      if (existingItem) {
+        state.totalCount -= existingItem.quantity;
+        state.totalPrice -= parseFloat(existingItem.price) * existingItem.quantity;
+        state.items = state.items.filter(item => item.id !== id);
+      }
+
+      // Save updated cart state to localStorage
+      setItemFunc(state.items, state.totalCount, state.totalPrice);
+    },
+    // Clear the cart
     clearDishCart: (state) => {
       state.items = [];
       state.totalCount = 0;
       state.totalPrice = 0;
-      setItemFunc(state.items.map(item => item), state.totalCount, state.totalPrice)
-    },
-    removeDish: (state, action) => {
-      const { dishId } = action.payload;
-      const removedItem = state.items.find((item) => item.id === dishId);
 
-      if (removedItem) {
-        state.totalCount -= removedItem.quantity;
-        state.totalPrice -= parseInt(removedItem.price) * removedItem.quantity;
-        state.items = state.items.filter((item) => item.id !== dishId);
-      }
-      setItemFunc(state.items.map(item => item), state.totalCount, state.totalPrice)
+      // Save updated cart state to localStorage
+      setItemFunc(state.items, state.totalCount, state.totalPrice);
     },
-    incrementDish: (state, action) => {
-      const { dishId } = action.payload;
-      const existingItem = state.items.find((item) => item.id === dishId);
-
-      if (existingItem) {
-        state.items.push({ ...existingItem, quantity: 1 });
-        state.totalCount += 1;
-        state.totalPrice += parseInt(existingItem.price);
-      }
-      setItemFunc(state.items.map(item => item), state.totalCount, state.totalPrice)
-    },
-    decrementDish: (state, action) => {
-      const { dishId } = action.payload;
-      const existingItemIndex = state.items.findIndex((item) => item.id === dishId);
-    
-      if (existingItemIndex !== -1) {
-        const updatedItems = [...state.items];
-        const existingItem = updatedItems[existingItemIndex];
-        
-        existingItem.quantity -= 1;
-        state.totalCount -= 1;
-        state.totalPrice -= parseInt(existingItem.price);
-    
-        if (existingItem.quantity === 0) {
-          updatedItems.splice(existingItemIndex, 1);
-        }
-    
-        state.items = updatedItems;
-      }
-      setItemFunc(state.items.map(item => item), state.totalCount, state.totalPrice)
-    },
-    
   },
 });
 
 export const {
+  setInitialCartState,
   addDishToCart,
-  clearDishCart,
-  removeDish,
-  incrementDish,
   decrementDish,
+  removeDish,
+  clearDishCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
