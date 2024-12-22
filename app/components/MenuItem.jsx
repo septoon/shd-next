@@ -8,17 +8,20 @@ import { addDishToCart } from '../GlobalRedux/Features/cart/cartSlice';
 import { fetchData } from '../GlobalRedux/Features/item/itemSlice';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
+import { fetchDelivery } from '../GlobalRedux/Features/delivery/deliverySlice';
 
 const MenuItem = () => {
   const dispatch = useDispatch();
 
   const item = useSelector((state) => state.item.item);
   const status = useSelector((state) => state.item.status);
+  const {promotion, promotionCount} = useSelector((state) => state.delivery);
 
   const [loaded, setLoaded] = useState([]);
 
   useEffect(() => {
     if (status === 'idle') {
+      dispatch(fetchDelivery())
       dispatch(fetchData());
     }
   }, [status, dispatch]);
@@ -30,13 +33,12 @@ const MenuItem = () => {
       image,
       serving,
       options,
-      price,
+      price: promotion ? price * (1 - promotionCount / 100) : price
     };
     dispatch(addDishToCart(obj));
   };
 
   if (status === 'loading') {
-    // Отображаем загрузочные скелеты
     return (
       <div className="flex flex-wrap justify-start md:justify-between px-5 pb-[80px]">
         {[...Array(4)].map((_, index) => (
@@ -62,7 +64,6 @@ const MenuItem = () => {
   }
 
   if (status === 'failed') {
-    // Отображаем сообщение об ошибке
     return (
       <div className="flex flex-col items-center justify-center h-screen px-4 text-center">
         <h2 className="text-2xl font-bold mb-4">Упс, кажется произошла ошибка</h2>
@@ -75,7 +76,7 @@ const MenuItem = () => {
   }
   
   if (!item || !Array.isArray(item)) {
-  return null; // Или отобразите индикатор загрузки
+  return null;
   }
 
   return (
@@ -94,6 +95,13 @@ const MenuItem = () => {
               alt="pic"
               onLoadingComplete={() => setLoaded((prev) => [...prev, i.id])}
             />
+            {
+              promotion && (
+                <div className='absolute flex items-center justify-center top-1 right-1 w-10 rounded-lg bg-red-500'>
+                  <span className='text-white text-sm'>-{promotionCount}%</span>
+                </div>
+              )
+            }
             {!loaded.includes(i.id) && (
               <div className="absolute inset-0">
                 <Skeleton width="100%" height="100%" className="rounded-md"></Skeleton>
@@ -117,7 +125,10 @@ const MenuItem = () => {
               )}
             </div>
             <div className="w-full flex flex-row justify-between items-center pr-2">
-              <span className="font-bold text-lightSlate-gray">{i.price} ₽</span>
+              <div className='flex flex-col'>
+                <span className="font-normal text-black"><s>{i.price} ₽</s></span>
+                <span className="font-bold text-lightSlate-gray">{i.price * (1 - promotionCount / 100)}  ₽</span>
+              </div>
               {
                 i.onStop ? (
                     <Button

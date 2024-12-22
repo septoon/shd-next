@@ -7,12 +7,16 @@ export const fetchDelivery = createAsyncThunk('delivery/fetchDelivery', async ()
   return response.data;
 });
 
+console.log('Full API URL:', `${process.env.NEXT_PUBLIC_API_URL}/delivery.json`);
+
 const initialState = {
   paidDelivery: null,
   deliveryStart: 10,
   deliveryEnd: 17,
   minDeliveryAmount: 2000,
   deliveryCost: 200,
+  promotion: false,
+  promotionCount: 10,
   status: 'idle',
   error: null,
 };
@@ -31,6 +35,8 @@ const deliverySlice = createSlice({
         state.paidDelivery = action.payload.paidDelivery;
         state.deliveryStart = action.payload.deliveryStart;
         state.deliveryEnd = action.payload.deliveryEnd;
+        state.promotion = action.payload.promotion;
+        state.promotionCount = action.payload.promotionCount;
         state.minDeliveryAmount = action.payload.minDeliveryAmount;
         state.deliveryCost = action.payload.deliveryCost;
       })

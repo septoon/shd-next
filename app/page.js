@@ -12,7 +12,7 @@ export default function Home() {
 
   const delivery = useSelector((state) => state.delivery);
   const contacts = useSelector((state) => state.contacts);
-  const { deliveryStart, deliveryEnd, minDeliveryAmount, deliveryCost, paidDelivery } = delivery;
+  const { deliveryStart, deliveryEnd, minDeliveryAmount, deliveryCost, paidDelivery, promotion, promotionCount } = delivery;
   const { phoneNumber, address } = contacts;
 
   const callToPhoneNumber = `tel:${phoneNumber}`
@@ -37,6 +37,14 @@ export default function Home() {
         <div className=" flex flex-col">
           <span className="text-xl italic mb-4">Доставка вкусного шашлыка в Алуште</span>
         </div>
+        {
+          promotion && (
+            <div className="flex flex-col">
+              <span className="text-2xl font-semibold">СКИДКА <b>{promotionCount} %</b></span>
+              <span className="text-xl font-semibold">На доставку и самовывоз</span>
+            </div>
+          )
+        }
         <Link
           href="/menu"
           className="w-[200px] bg-lightSlate-gray text-white text-center border-2 rounded-2xl">
