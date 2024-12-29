@@ -26,14 +26,15 @@ const MenuItem = () => {
     }
   }, [status, dispatch]);
 
-  const onAddDishes = (id, name, image, serving, options, price) => {
+  const onAddDishes = (id, name, image, serving, options, price, gram) => {
     const obj = {
       id,
       name,
       image,
       serving,
       options,
-      price: promotion ? price * (1 - promotionCount / 100) : price
+      price: promotion ? price * (1 - promotionCount / 100) : price,
+      gram
     };
     dispatch(addDishToCart(obj));
   };
@@ -140,7 +141,7 @@ const MenuItem = () => {
                   <Button
                     className="py-1 px-2 z-0 text-white bg-lightSlate-gray active:bg-light-gray"
                     label="В корзину"
-                    onClick={() => onAddDishes(i.id, i.name, i.image, i.serving, i.options, i.price)}
+                    onClick={() => onAddDishes(i.id, i.name, i.image, i.serving, i.options, i.price, i.gram)}
                   ></Button> 
                 )
               }

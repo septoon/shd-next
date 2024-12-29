@@ -4,8 +4,8 @@ import Image from 'next/image';
 import Trash from '@/public/img/trash.svg';
 
 const CartItem = ({ item, onClickMinusDish, onClickPlusDish, onClickRemoveDish }) => {
-  const { id, image, name, serving, price, options, quantity } = item;
-
+  const { id, image, name, serving, price, options, quantity, gram } = item;
+  
   const onMinusDish = () => {
     onClickMinusDish({ id, price });
   };
@@ -39,7 +39,7 @@ const CartItem = ({ item, onClickMinusDish, onClickPlusDish, onClickRemoveDish }
       </button>
       <div>
         {options ? (
-          <span>{serving * quantity} г.</span>
+          <span>{gram * quantity} г.</span>
         ) : (
           <span>{quantity} шт.</span>
         )}
