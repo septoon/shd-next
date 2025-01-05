@@ -47,8 +47,8 @@ export default function RootLayout({ children }) {
             }}
           />
       </head>
-      <body className='bg-shd w-full flex justify-center bg-cover bg-center bg-fixed min-h-screen'>
-        <div className='w-full max-w-[900px] flex flex-col items-center relative pt-20'>
+      <body className='bg-[#f0eef6] dark:bg-[#131922] w-full flex justify-center bg-cover bg-center bg-fixed min-h-screen'>
+        <div className='bg-shd w-full max-w-[900px] flex flex-col items-center relative pt-20'>
           <Providers>
             <PrimeReactProvider>
               <Header />
