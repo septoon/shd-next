@@ -1,5 +1,6 @@
 'use client'
 
+<<<<<<< HEAD
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -75,6 +76,93 @@ export default function Home() {
           </span>
         </div>
       </div>
+=======
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+
+export default function Home() {
+  const delivery = useSelector((state) => state.delivery);
+  const contacts = useSelector((state) => state.contacts);
+  const {
+    deliveryStart,
+    deliveryEnd,
+    minDeliveryAmount,
+    deliveryCost,
+    paidDelivery,
+    promotion,
+    promotionCount,
+  } = delivery;
+  const { phoneNumber, address } = contacts;
+
+  const callToPhoneNumber = `tel:${phoneNumber}`;
+  const isLoading = delivery.status === 'loading' || contacts.status === 'loading';
+
+  if (delivery.status === 'failed' || contacts.status === 'failed') {
+    return (
+      <main className="page-content">
+        <div className="section-headline">
+          <h1 className="section-title">Что-то пошло не так</h1>
+          <p className="section-subtitle">Не удалось загрузить данные. Попробуйте обновить страницу или позвоните нам напрямую.</p>
+        </div>
+        <a className="primary-btn" href={callToPhoneNumber}>Позвонить {phoneNumber}</a>
+      </main>
+    );
+  }
+
+  const renderDeliveryText = () => {
+    if (isLoading) {
+      return 'Обновляем условия доставки...';
+    }
+    if (paidDelivery) {
+      return `При заказе на сумму меньше ${minDeliveryAmount} ₽, доставка стоит ${deliveryCost} ₽`;
+    }
+    return `Бесплатно от ${minDeliveryAmount} ₽`;
+  };
+
+  return (
+    <main className="page-content">
+      <section className="hero-card">
+        <div className="eyebrow">Доставка свежего шашлыка по Алуште</div>
+        <h1 className="hero-title">Готовим на углях</h1>
+        <p className="hero-lede">
+          Тёплый дым, живой огонь и большие порции, приготовленные прямо перед доставкой.
+          Выбирайте любимые блюда — мы привезём без промедления.
+        </p>
+
+        {promotion && (
+          <div className="promo-chip">
+            <span className="promo-highlight">-{promotionCount}%</span>
+            <span>на доставку и самовывоз</span>
+          </div>
+        )}
+
+        <div className="cta-row">
+          <Link href="/menu" className="primary-btn">
+            Перейти в меню
+          </Link>
+          <div className="pill muted-pill">{renderDeliveryText()}</div>
+        </div>
+
+        <div className="info-grid">
+          <div className="info-tile">
+            <span className="label">Режим доставки</span>
+            <span className="value">
+              {isLoading ? '...' : `с ${deliveryStart}:00 до ${deliveryEnd}:00`}
+            </span>
+          </div>
+          <div className="info-tile">
+            <span className="label">Адрес</span>
+            <span className="value">{address}</span>
+          </div>
+          <div className="info-tile highlight">
+            <span className="label">Заказать по телефону</span>
+            <a className="value phone-link" href={callToPhoneNumber}>
+              {phoneNumber}
+            </a>
+          </div>
+        </div>
+      </section>
+>>>>>>> 806ff73 (update)
     </main>
   );
 }

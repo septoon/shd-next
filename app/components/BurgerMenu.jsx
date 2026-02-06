@@ -8,7 +8,11 @@ const BurgerMenu = () => {
   const isOpen = useSelector((state) => state.burger.isOpen)
   const dispatch = useDispatch()
   return (
+<<<<<<< HEAD
     <div>
+=======
+    <div className='min-[960px]:hidden'>
+>>>>>>> 806ff73 (update)
       {
           isOpen ? (
             <button type="button" onClick={() => dispatch(setIsOpen(false))}>

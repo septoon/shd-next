@@ -13,9 +13,15 @@ const MenuBtn = () => {
   };
   return (
     <button
+<<<<<<< HEAD
       className="w-16 h-16 bg-white flex justify-center items-center rounded-full shadow-3xl fixed bottom-main-btn right-6 lg:right-[20%]"
       onClick={() => showNav('bottom')}>
       <span className="text-lightSlate-gray font-bold">МЕНЮ</span>
+=======
+      className="menu-fab min-[960px]:hidden"
+      onClick={() => showNav('bottom')}>
+      <span>Меню</span>
+>>>>>>> 806ff73 (update)
     </button>
   );
 };

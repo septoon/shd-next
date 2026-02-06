@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export const icons = [
   {icon: 'https://img.icons8.com/ios/100/guacamole.png'},
   {icon: 'https://img.icons8.com/ios/100/wok.png'},
@@ -11,3 +12,30 @@ export const icons = [
   {icon: 'https://img.icons8.com/ios/100/cola--v1.png'},
   {icon: 'https://img.icons8.com/ios/100/cherry-cheesecake.png'}
 ]
+=======
+import {
+  FlameKindling,
+  Leaf,
+  Soup,
+  Pizza,
+  Sandwich,
+  Drumstick,
+  Beef,
+  CupSoda,
+  IceCream,
+  CakeSlice,
+} from 'lucide-react';
+
+export const icons = [
+  FlameKindling,
+  Leaf,
+  Soup,
+  Pizza,
+  Sandwich,
+  Drumstick,
+  Beef,
+  CupSoda,
+  IceCream,
+  CakeSlice,
+];
+>>>>>>> 806ff73 (update)

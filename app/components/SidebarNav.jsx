@@ -1,5 +1,6 @@
 'use client';
 
+<<<<<<< HEAD
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -58,6 +59,85 @@ const SidebarNav = () => {
             <span>Вакансии</span>
           </Link>
         </div>
+=======
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { createSelector } from 'reselect';
+import Link from 'next/link';
+import { Sidebar } from 'primereact/sidebar';
+
+import {
+  Home,
+  BookOpenText,
+  Truck,
+  MapPin,
+  ShoppingCart,
+  Briefcase,
+} from 'lucide-react';
+
+import { setIsOpen } from '../GlobalRedux/Features/burger/burgerSlice';
+
+const navItems = [
+  { href: '/', Icon: Home, label: 'Главная' },
+  { href: '/menu', Icon: BookOpenText, label: 'Меню' },
+  { href: '/delivery', Icon: Truck, label: 'Доставка и оплата' },
+  { href: '/contacts', Icon: MapPin, label: 'Контакты' },
+  { href: '/cart', Icon: ShoppingCart, label: 'Корзина' },
+  { href: '/vacancies', Icon: Briefcase, label: 'Вакансии' },
+];
+
+const SidebarNav = ({ persistent = false, className = '' }) => {
+  const selectBurgerState = (state) => state.burger;
+
+  const isOpenSelector = createSelector([selectBurgerState], (burger) => burger.isOpen);
+  const isOpen = useSelector(isOpenSelector);
+
+  const dispatch = useDispatch();
+
+  const NavList = () => (
+    <div className="sidebar-list">
+      {navItems.map((item, index) => (
+        <Link
+          href={item.href}
+          key={index}
+          className="sidebar-link"
+          onClick={() => dispatch(setIsOpen(false))}
+        >
+          <item.Icon size={20} strokeWidth={2} className="mr-4 sidebar-icon" />
+          <span>{item.label}</span>
+        </Link>
+      ))}
+    </div>
+  );
+
+  if (persistent) {
+    return (
+      <aside className={`sidebar-rail ${className}`}>
+        <NavList />
+      </aside>
+    );
+  }
+
+  useEffect(() => {
+    if (isOpen && typeof document !== 'undefined') {
+      const active = document.activeElement;
+      if (active instanceof HTMLElement) {
+        active.blur();
+      }
+    }
+  }, [isOpen]);
+
+  return (
+    <Sidebar
+      visible={isOpen}
+      position="right"
+      onHide={() => dispatch(setIsOpen(false))}
+      className={`sidebar-overlay ${className}`}
+      blockScroll
+    >
+      <div className="sidebar-sheet">
+        <NavList />
+>>>>>>> 806ff73 (update)
       </div>
     </Sidebar>
   );

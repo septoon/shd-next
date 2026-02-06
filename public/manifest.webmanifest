@@ -1,0 +1,23 @@
+{
+  "name": "Шашлычный Дом",
+  "short_name": "ШД",
+  "description": "Доставка вкусного шашлыка в Алуште. Бесплатная доставка по городу.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "#0b0f16",
+  "background_color": "#0b0f16",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

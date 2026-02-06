@@ -6,11 +6,19 @@ export const fetchData = createAsyncThunk(
   'item/fetchData',
   async (_, { rejectWithValue }) => {
     try {
+<<<<<<< HEAD
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/data.json?t=${Date.now()}`, {
+=======
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/data.json`, {
+>>>>>>> 806ff73 (update)
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
+<<<<<<< HEAD
+=======
+        timeout: 8000,
+>>>>>>> 806ff73 (update)
       });
       return response.data;
     } catch (err) {
@@ -53,4 +61,8 @@ const itemSlice = createSlice({
 
 export const { setItem } = itemSlice.actions;
 
+<<<<<<< HEAD
 export default itemSlice.reducer;
+=======
+export default itemSlice.reducer;
+>>>>>>> 806ff73 (update)

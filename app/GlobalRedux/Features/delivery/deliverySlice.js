@@ -3,12 +3,22 @@ import axios from 'axios';
 
 // Асинхронный thunk для получения данных доставки
 export const fetchDelivery = createAsyncThunk('delivery/fetchDelivery', async () => {
+<<<<<<< HEAD
   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/delivery.json`);
   return response.data;
 });
 
 console.log('Full API URL:', `${process.env.NEXT_PUBLIC_API_URL}/delivery.json`);
 
+=======
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/delivery.json`, {
+    timeout: 8000,
+  });
+
+  return response.data;
+});
+
+>>>>>>> 806ff73 (update)
 const initialState = {
   paidDelivery: null,
   deliveryStart: 10,

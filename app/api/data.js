@@ -242,7 +242,11 @@ export const data = {
       id: 28,
     },
     {
+<<<<<<< HEAD
       image: 'https://i.ibb.co/fGj4DBP/image.jpg',
+=======
+      image: 'https://i.ibb.co/fGj4DBP/image.webp',
+>>>>>>> 806ff73 (update)
       name: 'Наггетсы',
       serving: '6 шт',
       price: 250,
@@ -252,7 +256,11 @@ export const data = {
   ],
   "Порционный шашлык": [
     {
+<<<<<<< HEAD
       image: 'https://i.ibb.co/3dkFMfZ/IMG-4058.jpg',
+=======
+      image: 'https://i.ibb.co/3dkFMfZ/IMG-4058.webp',
+>>>>>>> 806ff73 (update)
       name: 'Люля из индейки',
       serving: '200 г',
       price: 400,

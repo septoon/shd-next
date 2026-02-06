@@ -7,6 +7,7 @@ export default function AvailableComponent({ children }) {
   const [data, setData] = useState({ isNotAvailable: false, content: '' });
 
   useEffect(() => {
+<<<<<<< HEAD
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/available.json?t=${Date.now()}`)
       .then((response) => setData(response.data))
@@ -30,3 +31,39 @@ export default function AvailableComponent({ children }) {
     </>
   );
 }
+=======
+    const controller = new AbortController();
+
+    const fetchAvailability = async () => {
+      try {
+        const response = await axios.get('https://api.shashlichny-dom.ru/available.json', {
+          timeout: 6000,
+          signal: controller.signal,
+        });
+        setData(response.data);
+      } catch (error) {
+        if (!axios.isCancel(error)) {
+          console.error('Ошибка загрузки данных:', error);
+        }
+      }
+    };
+
+    fetchAvailability();
+
+    return () => controller.abort();
+  }, []);
+
+  if (data.isNotAvailable) {
+    return (
+      <div className="availability-overlay">
+        <div className="availability-card">
+          <h1 className="availability-title">Доставка временно недоступна</h1>
+          <p className="availability-text">{data.content}</p>
+        </div>
+      </div>
+    );
+  }
+
+  return children;
+}
+>>>>>>> 806ff73 (update)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -21,3 +22,41 @@ const Header = () => {
 }
 
 export default Header
+=======
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { useSelector } from 'react-redux';
+
+import BurgerMenu from './BurgerMenu';
+import ToCartButton from './ToCartButton';
+
+import ShdTitle from '@/public/img/title-shd.svg';
+import ShdLogo from '@/public/img/logo-shd.webp';
+
+const Header = () => {
+  const cartItemsCount = useSelector((state) => state.cart.items?.length || 0);
+
+  return (
+    <header className="header-bar">
+      <Link href="/" className="logo-link">
+        <Image src={ShdTitle} alt="Шашлычный Дом" className="brand-title" />
+      </Link>
+      <div className="header-actions">
+        {cartItemsCount > 0 ? (
+          <ToCartButton variant="header" />
+        ) : (
+          <div className="logo-badge">
+            <Image src={ShdLogo} alt="logo" className="logo-mark" />
+            <span className="logo-copy">Жарим на углях</span>
+          </div>
+        )}
+        <BurgerMenu />
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+>>>>>>> 806ff73 (update)

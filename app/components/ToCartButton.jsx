@@ -1,6 +1,7 @@
 'use client';
 import { useSelector } from 'react-redux';
 
+<<<<<<< HEAD
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -26,6 +27,33 @@ const isBrowser = typeof window !== 'undefined';
         </Link>
       )}
     </>
+=======
+import Link from 'next/link';
+import { ShoppingCart } from 'lucide-react';
+
+const ToCartButton = ({ variant = 'floating' }) => {
+  const { items, totalCount, totalPrice } = useSelector((state) => ({
+    items: state.cart.items,
+    totalPrice: state.cart.totalPrice,
+    totalCount: state.cart.totalCount,
+  }));
+
+  if (!items || items.length === 0) {
+    return null;
+  }
+
+  const className =
+    variant === 'header'
+      ? 'to-cart-button to-cart-button--header'
+      : 'to-cart-button to-cart-button--floating';
+
+  return (
+    <Link href="/cart" className={className}>
+      <span className="to-cart-count">{totalCount}</span>
+      <ShoppingCart className="h-5 w-5 mx-2" />
+      <span className="to-cart-price max-[960px]:hidden">{totalPrice} ₽</span>
+    </Link>
+>>>>>>> 806ff73 (update)
   );
 };
 

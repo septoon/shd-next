@@ -1,6 +1,10 @@
 'use client';
 
+<<<<<<< HEAD
 import Image from 'next/image';
+=======
+import React from 'react';
+>>>>>>> 806ff73 (update)
 import Link from 'next/link';
 import { Dialog } from 'primereact/dialog';
 
@@ -47,8 +51,13 @@ const MenuNav = () => {
       <div className="flex flex-col items-center justify-center h-screen px-4 text-center">
         <h2 className="text-2xl font-bold mb-4">Упс, кажется произошла ошибка</h2>
         <p className="mb-4">Попробуйте зайти позже. Либо закажите по номеру:</p>
+<<<<<<< HEAD
         <a href="tel:+79788796220" className="text-blue-500 text-xl underline">
           +7 (978) 879-62-20
+=======
+        <a href="tel:+79784596935" className="text-blue-500 text-xl underline">
+          +7 (978) 459-69-35
+>>>>>>> 806ff73 (update)
         </a>
       </div>
     );
@@ -59,6 +68,7 @@ const MenuNav = () => {
       header="Меню"
       visible={navVisible}
       position={position}
+<<<<<<< HEAD
       className="w-[90vw] h-[70vh] lg:w-[40vw]"
       onHide={() => dispatch(setNavVisible(false))}
       draggable={false}
@@ -82,9 +92,37 @@ const MenuNav = () => {
             </Link>
           ))}
         </div>
+=======
+      className="w-[90vw] h-[70vh] lg:w-[40vw] menu-nav-dialog"
+      contentClassName="menu-nav-dialog__content"
+      headerClassName="menu-nav-dialog__header"
+      onHide={() => dispatch(setNavVisible(false))}
+      draggable={false}
+      resizable={false}
+      blockScroll
+    >
+      <div className="menu-nav-dialog__list font-comfortaa font-bold">
+        {Object.keys(data).map((category, index) => {
+          const IconComp = icons[index % icons.length];
+          return (
+            <React.Fragment key={index}>
+              <div className="menu-nav-dialog__icon">
+                <IconComp size={22} />
+              </div>
+              <Link href="/menu/item" className="menu-nav-dialog__link" onClick={() => handleClick(category)}>
+                {category}
+              </Link>
+            </React.Fragment>
+          );
+        })}
+>>>>>>> 806ff73 (update)
       </div>
     </Dialog>
   );
 };
 
+<<<<<<< HEAD
 export default MenuNav;
+=======
+export default MenuNav;
+>>>>>>> 806ff73 (update)

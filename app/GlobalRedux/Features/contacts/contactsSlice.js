@@ -2,10 +2,22 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Асинхронный thunk для получения данных доставки
+<<<<<<< HEAD
 export const fetchContacts = createAsyncThunk('contacts/fetchContacts', async () => {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/contacts.json`);
   return response.data;
 });
+=======
+export const fetchContacts = createAsyncThunk(
+  'contacts/fetchContacts',
+  async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/contacts.json`, {
+      timeout: 8000,
+    });
+    return response.data;
+  }
+);
+>>>>>>> 806ff73 (update)
 
 const initialState = {
   phoneNumber: '+ 7 (978) 697-84-75',
